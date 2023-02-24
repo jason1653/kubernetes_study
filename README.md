@@ -22,3 +22,4 @@
 13. deployment-replicas
 14. deployment-recreate
 15. deployment-rollingupdate
+16. deployment-rollback
