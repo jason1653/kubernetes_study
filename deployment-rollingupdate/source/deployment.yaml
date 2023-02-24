@@ -1,19 +1,26 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: myapp
+  name: my-app
 spec:
+  replicas: 5
   selector:
     matchLabels:
-      app: myapp
+      app: my-app
+  ##배포전략
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 2
+      maxSurge: 1 
   template:
     metadata:
       labels:
-        app: myapp
+        app: my-app
     spec:
       containers:
-      - name: myapp
-        image: <Image>
+      - name: my-app
+        image: yoonjeong/my-app:2.0
         resources:
           limits:
             memory: "64Mi"
