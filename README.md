@@ -23,3 +23,14 @@
 14. deployment-recreate
 15. deployment-rollingupdate
 16. deployment-rollback
+
+
+# service - service 다루는 법
+17. service-clusterip
+18. service-nodeport
+19. service-loadbalancer
+20. service-ingress
+21. service-invenssProbe
+22. service-readinessProbe
+23. service-configMap
+24. service-secret
