@@ -1,0 +1,53 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: unhealthy
+  labels:
+    name: myapp
+spec:
+  containers:
+  - name: unhealthy
+    image: yoonjeong/unhealthy-app:1.0
+    resources:
+      limits:
+        memory: "64Mi"
+        cpu: "50m"
+    ports:
+      - containerPort: 8080
+    livenessProbe: #probe 엔드포인트
+      httpGet:
+        path: /
+        port: 8080
+      initialDelaySeconds: 30 #컨테이너 시작 후 몇 초후에 probe를 시작할 것인가?
+      periodSeconds: 5 #probe 실행 주기
+      successThreshold: 1 #몇 개 성공 시 실패 횟수를 초기화할 것인가?
+      failureThreshold: 1 #연속으로 몇 번 실패 했을 때 컨테이너를 재시작할 것인가
+      timeoutSeconds: 10 #응답을 몇 초 만에 받아야 하는가
+
+---
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: healthy
+  labels:
+    app: myapp
+spec:
+  containers:
+  - name: healthy
+    image: yoonjeong/healthy-app:1.0
+    ports:
+      - containerPort: 8080
+    livenessProbe: #probe 엔드포인트
+      httpGet:
+        path: /
+        port: 8080
+      initialDelaySeconds: 30 #컨테이너 시작 후 몇 초후에 probe를 시작할 것인가?
+      periodSeconds: 5 #probe 실행 주기
+      successThreshold: 1 #몇 개 성공 시 실패 횟수를 초기화할 것인가?
+      failureThreshold: 1 #연속으로 몇 번 실패 했을 때 컨테이너를 재시작할 것인가
+      timeoutSeconds: 10 #응답을 몇 초 만에 받아야 하는가
+    resources:  
+      limits:
+        memory: "64Mi"
+        cpu: "50m"
