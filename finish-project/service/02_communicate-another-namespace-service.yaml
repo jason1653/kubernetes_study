@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: payment
+  namespace: order
+spec:
+  type: ExternalName # 외부목적지 endpoint를 서비스로 구성
+  externalName: payment-app.payment.svc.cluster.local
+  ports:
+  - port: 80
+
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: delivery
+  namespace: order
+spec:
+  type: ExternalName
+  externalName: delivery-app.delivery.svc.cluster.local
+  ports:
+  - port: 80
+
